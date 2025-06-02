@@ -1,0 +1,45 @@
+name: ${NAME}
+
+networks:
+    symfony:
+
+services:
+    php-fpm:
+        build:
+            context: ./php-fpm
+            dockerfile: Dockerfile
+            args:
+                PHP_FPM_PORT: ${PHP_FPM_PORT}
+                PHP_FPM_SYMFONY_CLI_VERSION: ${PHP_FPM_SYMFONY_CLI_VERSION}
+                PHP_XDEBUG_MODE: ${PHP_XDEBUG_MODE}
+                PHP_XDEBUG_CLIENT_PORT: ${PHP_XDEBUG_CLIENT_PORT}
+                PHP_XDEBUG_CLIENT_HOST: ${PHP_XDEBUG_CLIENT_HOST}
+        environment:
+            - HOST_USER_ID=${UID}
+            - HOST_GROUP_ID=${GID}
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
+        volumes:
+            - ../:/var/www/symfony:delegated
+        user: "${UID}:${GID}"
+        networks:
+            - symfony
+
+    nginx:
+        build:
+            context: ./nginx
+            args:
+                NGINX_SYMFONY_SERVER_NAME: ${NGINX_SYMFONY_SERVER_NAME}
+                PHP_FPM_PORT: ${PHP_FPM_PORT}
+        ports:
+            - "8180:80"
+            - "8443:443"
+        depends_on:
+            - php-fpm
+        environment:
+            - NGINX_SYMFONY_SERVER_NAME=${NGINX_SYMFONY_SERVER_NAME}
+        volumes:
+            - ../:/var/www/symfony:cached
+            - ./nginx/certs:/etc/nginx/ssl/
+        networks:
+            - symfony

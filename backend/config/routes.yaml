@@ -1,0 +1,12 @@
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+
+
+presentation:
+    resource:
+        path: ../src/FavoriteMovie/Presentation/Rest/V1/
+        namespace: App\FavoriteMovie\Presentation\Rest\V1
+    type: attribute
