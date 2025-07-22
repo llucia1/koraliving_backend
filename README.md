@@ -290,6 +290,11 @@ POST /api/v1/reservation
 Durante la implementación de esta prueba técnica se tomaron algunas decisiones conscientes y se hicieron ciertos sacrificios debido a los plazos, que detallo aquí junto con algunas mejoras futuras identificadas.
 
 
+
+
+
+
+
 ### 📄 Decisiones y aspectos no abordados por tiempo
 
 - 🚫 **Documentación OpenAPI / Swagger**
@@ -317,6 +322,9 @@ Durante la implementación de esta prueba técnica se tomaron algunas decisiones
 
 
 
+
+
+
 ### 📝 Otras posibles mejoras futuras
 
 Además, identifico otras áreas que podrían mejorarse en el proyecto si el tiempo y el alcance lo permitieran:
@@ -332,6 +340,9 @@ Además, identifico otras áreas que podrían mejorarse en el proyecto si el tie
 
 - 🚀 **Optimización del rendimiento**
   > Aunque no fue necesario para la prueba, se podrían implementar consultas más eficientes o cachés para escenarios con mucha concurrencia o mayor volumen de datos.
+
+
+
 
 
 
