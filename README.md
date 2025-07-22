@@ -25,14 +25,14 @@ Incluye backend (Symfony + PHP) y frontend (pendiente), orquestado con Docker.
 
 ### 1️⃣ Clonar el repositorio
 
-```bash
+
 git clone https://github.com/llucia1/FynkusTest.git
 cd FynkusTest
 ---
 
 ### 2️⃣ Levantar los contenedores
 Levanta el entorno completo con Docker:
-```bash
+
 docker-compose up -d --build
 
 ---
@@ -41,15 +41,15 @@ docker-compose up -d --build
 Una vez que los contenedores están levantados correctamente, es necesario ejecutar las migraciones y cargar los fixtures para inicializar la base de datos con datos de prueba.
 
 ### 3️⃣ Acceder al contenedor del backend con el comando `make`:
-```bash
+
 make docker-access-backend
 
 ### 4️⃣ Dentro del contenedor del backend ejecutar migraciones:
-```bash
+
 php bin/console doctrine:migrations:migrate
 
 ### 5️⃣ Dentro del contenedor del backend cargar fixtures:
-```bash
+
 php bin/console doctrine:fixtures:load
 ---
 ### 6️⃣ Probar la aplicación
@@ -58,7 +58,7 @@ Una vez ejecutadas las migraciones y, opcionalmente, cargadas las fixtures, ya p
 
 - 📄 Backend API: [http://localhost:8000](http://localhost:8000)  
   Puedes probar, por ejemplo:
-  ```bash
+
   curl http://localhost:8000/api/v1/space
 
 para obtener la lista de espacios.
