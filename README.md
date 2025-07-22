@@ -14,8 +14,9 @@ Incluye backend (Symfony + PHP) y frontend (pendiente), orquestado con Docker.
 - **Contenedores**: Docker + docker-compose
 - **Frontend**: Vue 3 + TypeScript (📌 pendiente)
 
-```
-```
+
+
+
 
 ## 🛠️ Instrucciones para levantar el entorno
 
@@ -26,17 +27,21 @@ Incluye backend (Symfony + PHP) y frontend (pendiente), orquestado con Docker.
 
 ### 1️⃣ Clonar el repositorio
 
-
+```
 git clone https://github.com/llucia1/FynkusTest.git
 cd FynkusTest
----
+
+
+
+
 
 ### 2️⃣ Levantar los contenedores
 Levanta el entorno completo con Docker:
-
+```
 docker-compose up -d --build
 
----
+
+
 ### 🗄️ Preparar la base de datos
 
 Una vez que los contenedores están levantados correctamente, es necesario ejecutar las migraciones y cargar los fixtures para inicializar la base de datos con datos de prueba.
@@ -50,9 +55,9 @@ make docker-access-backend
 php bin/console doctrine:migrations:migrate
 
 ### 5️⃣ Dentro del contenedor del backend cargar fixtures:
-
+```
 php bin/console doctrine:fixtures:load
----
+
 ### 6️⃣ Probar la aplicación
 
 Una vez ejecutadas las migraciones y, opcionalmente, cargadas las fixtures, ya puedes acceder a la aplicación desde tu navegador o con herramientas como `curl` o Postman.
@@ -68,9 +73,10 @@ para obtener la lista de espacios.
     Desde aquí puedes interactuar con la interfaz gráfica para gestionar reservas y ver la disponibilidad.
 
 ✅ Si ambos cargan correctamente, tu entorno está listo y funcionando.
-```
-```
-```
+
+
+
+
 ### 🔷 Nota sobre el endpoint de reserva
 
 Actualmente, el endpoint `POST /api/v1/reservation` permite crear una reserva para un espacio en un día seleccionado, especificando una o varias horas.
@@ -78,11 +84,12 @@ Actualmente, el endpoint `POST /api/v1/reservation` permite crear una reserva pa
 - Este endpoint solo permite **crear** una reserva.
 - Si intentas añadir una reserva para el mismo espacio, día y horas más de una vez, recibirás un error indicando que ya existe.
 - Para poder modificar o actualizar una reserva existente, sería necesario implementar en base a REST un endpoint `PATCH`, que todavía no está desarrollado por alta tiempo.
-```
-```
-```
 
----
+
+
+
+
+
 
 # 📄 Diseño y Arquitectura
 
@@ -99,13 +106,14 @@ He definido dos **Bounded Contexts** (BC) principales:
 
 Cada uno encapsula su propia lógica de dominio, sus entidades, repositorios e interfaces.
 
----
+
+
 
 ## 🔗 Comunicación entre Bounded Contexts
 La comunicación entre los BC se realiza mediante un **Bus de Eventos**.  
 Esto asegura un acoplamiento bajo y permite que los contextos se comuniquen de manera asíncrona o síncrona sin depender directamente uno del otro.
 
----
+
 
 ## 📬 Ejemplo de Consulta de Space desde Reservation
 En el contexto `Reservation` se hace una consulta para recuperar un `Space` de la siguiente forma, utilizando el **QueryBus** y siguiendo el patrón CQRS:
@@ -264,6 +272,8 @@ POST /api/v1/reservation
   "message": "Reservas actualizadas correctamente"
 }
 
+
+
 ### 🔗 Notas:
 
     Las fechas deben enviarse siempre en formato dd/mm/yyyy.
@@ -272,9 +282,12 @@ POST /api/v1/reservation
 
     Si no existe disponibilidad para el día, el backend devuelve un array vacío y el frontend crea las 13 franjas libres para mostrar.
 
+
+
 ## ⚖️ Trade-offs y decisiones por límite de tiempo
 
 Durante la implementación de esta prueba técnica se tomaron algunas decisiones conscientes y se hicieron ciertos sacrificios debido a los plazos, que detallo aquí junto con algunas mejoras futuras identificadas.
+
 
 ### 📄 Decisiones y aspectos no abordados por tiempo
 
@@ -298,7 +311,10 @@ Durante la implementación de esta prueba técnica se tomaron algunas decisiones
   > No se trabajó con un flujo de ramas completo (como Git Flow). La idea futura sería mantener `main` como rama principal, `develop` para integración y crear ramas específicas por caso de uso para mergear sobre `develop` y luego a `main` en despliegue.
   > *Mejora futura: formalizar estrategia de ramas y CI/CD para despliegues consistentes.*
 
----
+
+
+
+
 
 ### 📝 Otras posibles mejoras futuras
 
@@ -342,7 +358,8 @@ Una mejora significativa sería introducir una nueva **entidad de dominio** que 
 - 🕕 **Hora de fin** del planning.
 - ⏱️ **Incremento** entre franjas (por ejemplo, cada 15, 30, 60 minutos).
 
----
+
+
 
 ### 📝 Beneficios de esta mejora
 
@@ -351,7 +368,9 @@ Una mejora significativa sería introducir una nueva **entidad de dominio** que 
 ✅ Valida que las horas reservadas estén dentro de los rangos definidos.  
 ✅ Hace el sistema más flexible y preparado para escenarios más complejos.  
 
----
+
+
+
 
 ### 🔗 Funcionamiento esperado
 
@@ -361,8 +380,6 @@ Al consultar la disponibilidad o crear una reserva:
 - Validaría que las horas solicitadas para reserva cumplen con el rango y el incremento permitido.
 - Si no cumplen, se devolvería un error indicando que la reserva es inválida.
 
----
-
 ### 📦 Ejemplo de atributos de la entidad `PlanningConfiguration`
 
 | Atributo        | Tipo      | Descripción                          |
@@ -371,7 +388,9 @@ Al consultar la disponibilidad o crear una reserva:
 | `endHour`        | int       | Hora de fin (por ejemplo, 22)       |
 | `increment`      | int       | Incremento entre franjas en minutos (por ejemplo, 30) |
 
----
+
+
+
 
 ### 🔗 Mejora futura
 
@@ -416,5 +435,6 @@ Aunque ya implementaste TDD en backend:
 🔹 Integrar un pipeline CI/CD para validar código, ejecutar tests y desplegar automáticamente.
 🔹 Añadir ambientes separados para staging y production.
 
----
+
+
 
