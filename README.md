@@ -28,10 +28,10 @@ Incluye backend (Symfony + PHP) y frontend (pendiente), orquestado con Docker.
 ### 1️⃣ Clonar el repositorio
 
 ```bash
-$ git clone https://github.com/llucia1/FynkusTest.git
+git clone https://github.com/llucia1/FynkusTest.git
 ```
 ```bash
-$ cd FynkusTest
+cd FynkusTest
 ```
 
 
