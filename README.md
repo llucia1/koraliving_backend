@@ -29,7 +29,10 @@ Incluye backend (Symfony + PHP) y frontend (pendiente), orquestado con Docker.
 
 ```bash
 $ git clone https://github.com/llucia1/FynkusTest.git
+```
+```bash
 $ cd FynkusTest
+```
 
 
 
