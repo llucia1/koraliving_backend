@@ -3,7 +3,7 @@
 Prototipo funcional para un módulo de reservas de espacios comunes en una comunidad de vecinos.  
 Incluye backend (Symfony + PHP) y frontend (pendiente), orquestado con Docker.
 
----
+
 
 ## 🚀 Stack Tecnológico
 
@@ -27,7 +27,7 @@ Incluye backend (Symfony + PHP) y frontend (pendiente), orquestado con Docker.
 
 ### 1️⃣ Clonar el repositorio
 
-```
+
 git clone https://github.com/llucia1/FynkusTest.git
 cd FynkusTest
 
@@ -37,7 +37,7 @@ cd FynkusTest
 
 ### 2️⃣ Levantar los contenedores
 Levanta el entorno completo con Docker:
-```
+
 docker-compose up -d --build
 
 
@@ -55,7 +55,7 @@ make docker-access-backend
 php bin/console doctrine:migrations:migrate
 
 ### 5️⃣ Dentro del contenedor del backend cargar fixtures:
-```
+
 php bin/console doctrine:fixtures:load
 
 ### 6️⃣ Probar la aplicación
@@ -97,7 +97,7 @@ Actualmente, el endpoint `POST /api/v1/reservation` permite crear una reserva pa
 El proyecto está diseñado siguiendo principios de **Arquitectura Hexagonal (Ports & Adapters)** y **Domain-Driven Design (DDD)**.  
 Esto permite una separación clara de responsabilidades y facilita el mantenimiento, la escalabilidad y la testabilidad.
 
----
+
 
 ## 📦 Bounded Contexts
 He definido dos **Bounded Contexts** (BC) principales:  
@@ -118,7 +118,7 @@ Esto asegura un acoplamiento bajo y permite que los contextos se comuniquen de m
 ## 📬 Ejemplo de Consulta de Space desde Reservation
 En el contexto `Reservation` se hace una consulta para recuperar un `Space` de la siguiente forma, utilizando el **QueryBus** y siguiendo el patrón CQRS:
 
-```php
+php
 public function getSpace(string $uuid): mixed
 {
     $spaceEntityQuery = $this->queryBus->ask(new GetSpaceByUuidQueried($uuid));
@@ -176,17 +176,17 @@ Tal y como se muestra en la estructura del código (ver imagen adjunta), se ha i
 
 Esto permite tanto la ejecución de comandos y consultas como la publicación y manejo de eventos de dominio.
 
----
-```
-```
-```
-```
+
+
+
+
+
 
 ## 🌐 Endpoints implementados
 
 El backend expone los siguientes endpoints para la gestión de reservas y espacios.
 
----
+
 
 ### 📋 Espacios (`Space`)
 
@@ -195,7 +195,7 @@ GET /api/v1/space
 
 
 #### 📄 Respuesta:
-```json
+json
 [
   {
     "uuid": "aa645f49-94f3-4c63-ab3d-0afec44ebf21",
@@ -210,7 +210,7 @@ GET /api/v1/space
     "name": "Gimnasio"
   }
 ]
----
+
 
 ### 📋 Reservas (Reservation)
 #### 🔷 Consultar disponibilidad de un espacio en una fecha
@@ -232,7 +232,8 @@ GET /api/v1/reservation/space/{spaceUuid}/vailability?date=dd/mm/yyyy
   },
   ...
 ]
----
+
+
 #### 📄 Respuesta cuando no hay datos:
 
 []
@@ -338,7 +339,8 @@ Además, identifico otras áreas que podrían mejorarse en el proyecto si el tie
 
 Además de las mejoras mencionadas en los trade-offs anteriores, se identifican otras posibles evoluciones para robustecer y escalar la solución:
 
----
+
+
 ### 🔷 Implementar un endpoint `PATCH` para actualizar reservas
 
 Actualmente, el endpoint `POST /api/v1/reservation` solo permite **crear** una reserva para un espacio en un día seleccionado, especificando una o varias horas.
