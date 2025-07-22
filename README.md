@@ -14,7 +14,8 @@ Incluye backend (Symfony + PHP) y frontend (pendiente), orquestado con Docker.
 - **Contenedores**: Docker + docker-compose
 - **Frontend**: Vue 3 + TypeScript (📌 pendiente)
 
----
+```
+```
 
 ## 🛠️ Instrucciones para levantar el entorno
 
@@ -67,7 +68,9 @@ para obtener la lista de espacios.
     Desde aquí puedes interactuar con la interfaz gráfica para gestionar reservas y ver la disponibilidad.
 
 ✅ Si ambos cargan correctamente, tu entorno está listo y funcionando.
----
+```
+```
+```
 ### 🔷 Nota sobre el endpoint de reserva
 
 Actualmente, el endpoint `POST /api/v1/reservation` permite crear una reserva para un espacio en un día seleccionado, especificando una o varias horas.
@@ -75,7 +78,9 @@ Actualmente, el endpoint `POST /api/v1/reservation` permite crear una reserva pa
 - Este endpoint solo permite **crear** una reserva.
 - Si intentas añadir una reserva para el mismo espacio, día y horas más de una vez, recibirás un error indicando que ya existe.
 - Para poder modificar o actualizar una reserva existente, sería necesario implementar en base a REST un endpoint `PATCH`, que todavía no está desarrollado por alta tiempo.
-
+```
+```
+```
 
 ---
 
@@ -164,6 +169,10 @@ Tal y como se muestra en la estructura del código (ver imagen adjunta), se ha i
 Esto permite tanto la ejecución de comandos y consultas como la publicación y manejo de eventos de dominio.
 
 ---
+```
+```
+```
+```
 
 ## 🌐 Endpoints implementados
 
